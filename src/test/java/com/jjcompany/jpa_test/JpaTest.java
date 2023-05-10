@@ -1,6 +1,7 @@
 package com.jjcompany.jpa_test;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,22 @@ public class JpaTest {
 		for(MemberDto memberDto : memberDtos) {
 			System.out.println(memberDto.toString());
 		}
+	}
+	@Test
+	@DisplayName("회원정보 수정")
+	public void modifyMember() {
+		
+		Optional<MemberDto> optionalDto = memberRepository.findById(3L);
+		
+		MemberDto memberDto = optionalDto.get();
+		
+		memberDto.setAge(32); // 나이 수정
+		
+		memberRepository.save(memberDto);
+		
+		optionalDto = memberRepository.findById(3L);
+		
+		System.out.println(optionalDto.get().toString());
 	}
 
 }
