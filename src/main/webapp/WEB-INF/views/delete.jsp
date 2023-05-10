@@ -10,7 +10,11 @@
 	<h2>회원 탈퇴</h2>
 	<hr>
 	<form action="deleteOk">
-		탈퇴할 회원 입력 : <input type="text" name = "deleteHakbun"> 
+		탈퇴할 회원 학번 입력 : <input type="text" name = "deleteHakbun"> 
+		<input type="submit" value="탈퇴">
+	</form>
+	<form action="deleteOk2">
+		탈퇴할 회원 이름 입력 : <input type="text" name = "deleteName"> 
 		<input type="submit" value="탈퇴">
 	</form>
 

@@ -74,9 +74,19 @@ public class HomeController {
 	@RequestMapping(value = "/memberList")
 	public String memberList(Model model) {
 		
-		model.addAttribute("memberDtos", memberRepository.findAll());
+		// model.addAttribute("memberDtos", memberRepository.findAll());
+		model.addAttribute("memberDtos", memberRepository.findAllByOrderByHakbunDesc()); //학번의 내림차순 정렬 후 리스트 불러오기
 		
 		return "memberList";
+	}
+	@RequestMapping(value = "/deleteOk2") //이름으롷 조회하여 삭제
+	public String deleteOk2(HttpServletRequest request) {
+		
+		String deleteName = request.getParameter("deleteName");
+		
+		memberRepository.deleteAllByName(deleteName);
+		
+		return "redirect:memberList";
 	}
 
 }
