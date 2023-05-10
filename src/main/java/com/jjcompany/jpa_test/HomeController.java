@@ -1,9 +1,12 @@
 package com.jjcompany.jpa_test;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jjcompany.jpa_test.dto.MemberDto;
@@ -20,7 +23,7 @@ public class HomeController {
 		return "join";
 	}
 	@RequestMapping(value = "/joinOk")
-	public String joinOk(HttpServletRequest request) {
+	public String joinOk(HttpServletRequest request, Model model) {
 		
 		String name = request.getParameter("name");
 		int age = Integer.parseInt(request.getParameter("age"));
@@ -36,7 +39,24 @@ public class HomeController {
 		
 		memberRepository.save(memberDto);
 		
+		model.addAttribute("memberDto", memberDto);
+		
 		return "joinOk";
+	}
+	@RequestMapping(value = "/search")
+	public String search() {
+		return "search";
+	}
+	@RequestMapping(value = "/searchOk")
+	public String searchOk(HttpServletRequest request, Model model) {
+		
+		String searchName = request.getParameter("searchName");
+		
+		List<MemberDto> memberDtos = memberRepository.findByName(searchName);
+		
+		model.addAttribute("memberDtos", memberDtos);
+		
+		return "searchOk";
 	}
 
 }
